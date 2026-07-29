@@ -6,6 +6,8 @@
 
 [中文说明](README.md)
 
+For project status, scope, feedback, and public-material boundaries, see [`STATUS.md`](STATUS.md).
+
 A zero-code agent skill for reviewing an “our AI is ready to launch” proposal. It applies **eight veto conditions** and **seven review dimensions**, then returns a **launch veto card** for the review meeting: which conditions are triggered, which proposal sentence supports each finding, and what the team should answer next.
 
 It answers one question:
