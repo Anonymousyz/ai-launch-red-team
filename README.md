@@ -1,4 +1,4 @@
-# AI 上线否决卡(ai-launch-red-team)
+# AI 上线否决卡（ai-launch-red-team）
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Skill](https://img.shields.io/badge/type-agent%20skill-blue)
@@ -6,13 +6,13 @@
 
 [English](README.en.md)
 
-一个零代码的 Agent 技能:把"我们的 AI 准备上线了"的方案描述粘给它,它按 **8 条一票否决 + 七个维度**当场红队你,输出一张可以直接带进评审会的**上线否决卡**——哪条否决被触发、依据是方案里哪句原话、评审会上该追问什么。
+这是一个无需运行代码的 Agent 技能。把“我们的 AI 准备上线”这类方案描述交给它，它会按 **8 条一票否决**和**七个维度**做结构化红队评审，并生成一张可带进评审会的上线否决卡：哪些条件触发了否决、依据是方案中的哪句话、还应当追问什么。
 
-它回答的问题只有一个:
+它只回答一个问题：
 
-> 演示跑通了。在它接触真实业务之前,还有哪些事没人想清楚?
+> 演示已经跑通。若要接触真实业务，还缺哪些条件？
 
-## 30 秒安装
+## 安装
 
 ```bash
 # Claude Code
@@ -29,7 +29,7 @@ Windows 把 `~` 换成 `%USERPROFILE%`。也可以直接下载 ZIP,把文件夹�
 
 ## 怎么用
 
-安装后直接描述需求即可触发,例如:
+安装后，在支持该技能的 Agent 中提出评审请求，例如：
 
 ```text
 用上线否决卡红队一下这个方案:
@@ -37,14 +37,14 @@ Windows 把 `~` 换成 `%USERPROFILE%`。也可以直接下载 ZIP,把文件夹�
 可以自动执行退款,下周对全部用户上线,监控后面再补。
 ```
 
-30 秒后你会得到一张否决卡:
+你会得到一张否决卡：
 
-- **一票否决扫描表**:8 条逐一判定【触发 / 存疑 / 未触发】,每条判定引用你方案里的原话;
-- **七维快检**:业务价值、数据边界、质量评估、人工复核、日志审计、运维成本、组织采纳,逐项标【已答 / 含糊 / 缺失】;
-- **追问清单**:按风险排序、可以直接在评审会上提的问题;
-- **红队建议**:先做什么才有资格谈上线。
+- **一票否决扫描表**：8 条逐一判定【触发 / 存疑 / 未触发】，每条引用方案原话；
+- **七维快检**：业务价值、数据边界、质量评估、人工复核、日志审计、运维成本、组织采纳，逐项标注【已答 / 含糊 / 缺失】；
+- **追问清单**：按风险排序，可在评审会上直接提出；
+- **红队建议**：先处理什么，再讨论上线范围。
 
-上面那个方案会被拦下两条否决:"自动执行退款"(高风险决策无人工复核)和"监控后面再补"(无差错处理或回滚负责人)。完整输出见 [examples/01-refund-agent.md](examples/01-refund-agent.md)。
+上例会触发两条否决：“自动执行退款”对应高风险决策无人工复核；“监控后面再补”说明没有差错处理或回滚负责人。完整输出见 [examples/01-refund-agent.md](examples/01-refund-agent.md)。
 
 ## 评审逻辑
 
@@ -67,17 +67,17 @@ flowchart LR
 | [02 内部知识库助手](examples/02-kb-assistant.md) | 敏感数据流向未批准模型;授权与日志说不清 |
 | [03 合同条款初筛](examples/03-controlled-pilot.md) | 无否决触发的干净方案长什么样,以及它仍然欠的三件事 |
 
-## 它不做什么
+## 使用边界
 
-- **不核实事实。**你说"有日志"它就按"声称有日志"处理,追问清单里会向你要证据。
-- **不打分、不批准。**它给的是结构性缺口和印象判断。需要可留档、可复核、带报告的正式评估,用完整工具链:
+- **不核实事实。**方案写“有日志”时，技能只能记录为“声称有日志”，并在追问清单中索要证据。
+- **不打分，也不批准。**它给出结构性缺口和初步判断。需要可留档、可复核并生成报告的评估时，可使用完整工具链：
 
 | 你需要 | 去哪 |
 |---|---|
 | 70 分制 + 8 条否决的正式评估与 HTML 报告 | [ai-prototype-to-production-toolkit](https://github.com/Anonymousyz/ai-prototype-to-production-toolkit)(`ai-ready` CLI) |
 | 把评估结果变成负责人能拍板的决策包 | [research-to-decision-toolkit](https://github.com/Anonymousyz/research-to-decision-toolkit)(`r2d` CLI) |
-| 按缺口找评估/护栏/可观测等工具 | [awesome-ai-production-readiness](https://github.com/Anonymousyz/awesome-ai-production-readiness)(57 项经核验的目录) |
+| 按缺口查找评估、护栏和可观测工具 | [awesome-ai-production-readiness](https://github.com/Anonymousyz/awesome-ai-production-readiness)（资源目录） |
 
 ## 许可证
 
-MIT,见 [LICENSE](LICENSE)。示例全部虚构,不含任何真实客户、雇主或运营数据。
+MIT，见 [LICENSE](LICENSE)。示例均为虚构内容，不含真实客户、雇主或运行数据。
